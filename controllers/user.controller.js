@@ -1,4 +1,4 @@
-const { models } = require("mongoose");
+
 const User = require("../models/user.model");
 
 const create = async (req, res) => {

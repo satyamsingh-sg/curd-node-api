@@ -3,6 +3,9 @@ const express = require('express');
 const cors = require("cors");
 const app = express();
 const bodyParser = require('body-parser')
+const multer  = require('multer')
+const upload = multer({ dest: 'uploads/' })
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 const Db = require('./config/mongo.connection')
@@ -17,6 +20,11 @@ app.use((req, res, next) => {
   
 const routers = require("./routes/route")
 app.use("/user", routers);
+
+app.get('/satyam',upload.single('img'),(req,res)=>{
+  console.log(req.file)
+  res.send("hi satyam kumar")
+})
 
 app.listen(3001,()=>{
     console.log(`Server is running on ${process.env.PORT}`);
